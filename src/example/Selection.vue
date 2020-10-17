@@ -28,15 +28,15 @@ export default {
   name: 'd3-net-selection',
   props: ['data'],
   methods: {
-    emit (action, args) {
+    emit(action, args) {
       this.$emit('action', action, args)
     }
   },
   computed: {
-    links () {
+    links() {
       return this.data.links
     },
-    nodes () {
+    nodes() {
       return this.data.nodes
     }
   }

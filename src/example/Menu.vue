@@ -71,7 +71,7 @@ import defaultData from './data.js'
 export default {
   name: 'd3-net-example-menu',
   props: ['links', 'nodes', 'settings', 'options'],
-  data () {
+  data() {
     let data = Object.assign({}, defaultData)
     return {
       opts: data.options,
@@ -80,21 +80,21 @@ export default {
       setts: null
     }
   },
-  created () {
+  created() {
     this.opts = this.options
     this.setts = this.settings
   },
   methods: {
-    change () {
+    change() {
       this.$emit('options', this.opts)
     },
-    reset () {
+    reset() {
       this.opts = Object.assign({}, defaultData.options)
       this.options.width = this.$el.clientWidth
       this.options.height = this.$el.clientHeight
       this.$emit('reset', this.options)
     },
-    emit (e) {
+    emit(e) {
       this.$emit(e)
     }
   }
@@ -124,5 +124,4 @@ export default {
 
 ul.test-menu + ul.test-menu
   border-left: none
-
 </style>

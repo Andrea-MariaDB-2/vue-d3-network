@@ -79,27 +79,42 @@
 import svgExport from '../lib/js/svgExport.js'
 
 export default {
-  name: 'svg-renderer',
+  name: 'SvgRenderer',
   props: [
+    // eslint-disable-next-line vue/require-prop-types
     'size',
+    // eslint-disable-next-line vue/require-prop-types
     'nodes',
+    // eslint-disable-next-line vue/require-prop-types
     'noNodes',
+    // eslint-disable-next-line vue/require-prop-types
     'selected',
+    // eslint-disable-next-line vue/require-prop-types
     'linksSelected',
+    // eslint-disable-next-line vue/require-prop-types
     'links',
+    // eslint-disable-next-line vue/require-prop-types
     'nodeSize',
+    // eslint-disable-next-line vue/require-prop-types
     'padding',
+    // eslint-disable-next-line vue/require-prop-types
     'fontSize',
+    // eslint-disable-next-line vue/require-prop-types
     'strLinks',
+    // eslint-disable-next-line vue/require-prop-types
     'linkWidth',
+    // eslint-disable-next-line vue/require-prop-types
     'nodeLabels',
+    // eslint-disable-next-line vue/require-prop-types
     'linkLabels',
+    // eslint-disable-next-line vue/require-prop-types
     'labelOffset',
+    // eslint-disable-next-line vue/require-prop-types
     'nodeSym'
   ],
 
   computed: {
-    nodeSvg () {
+    nodeSvg() {
       if (this.nodeSym) {
         return svgExport.toObject(this.nodeSym)
       }
@@ -107,18 +122,18 @@ export default {
     }
   },
   methods: {
-    getNodeSize (node, side) {
+    getNodeSize(node, side) {
       let size = node._size || this.nodeSize
       if (side) size = node['_' + side] || size
       return size
     },
-    svgIcon (node) {
+    svgIcon(node) {
       return node.svgObj || this.nodeSvg
     },
-    emit (e, args) {
+    emit(e, args) {
       this.$emit('action', e, args)
     },
-    svgScreenShot (cb, toSvg, background, allCss) {
+    svgScreenShot(cb, toSvg, background, allCss) {
       let svg = svgExport.export(this.$refs.svg, allCss)
       if (!toSvg) {
         if (!background) background = this.searchBackground()
@@ -131,7 +146,7 @@ export default {
         cb(null, svgExport.save(svg))
       }
     },
-    linkClass (linkId) {
+    linkClass(linkId) {
       let cssClass = ['link']
       if (this.linksSelected.hasOwnProperty(linkId)) {
         cssClass.push('selected')
@@ -141,7 +156,7 @@ export default {
       }
       return cssClass
     },
-    linkPath (link) {
+    linkPath(link) {
       let d = {
         M: [link.source.x | 0, link.source.y | 0],
         X: [link.target.x | 0, link.target.y | 0]
@@ -153,24 +168,24 @@ export default {
         return 'M ' + d.M + ' Q ' + d.Q.join(' ') + ' ' + d.X
       }
     },
-    nodeStyle (node) {
-      return (node._color) ? 'fill: ' + node._color : ''
+    nodeStyle(node) {
+      return node._color ? 'fill: ' + node._color : ''
     },
-    linkStyle (link) {
+    linkStyle(link) {
       let style = {}
       if (link._color) style.stroke = link._color
       return style
     },
-    nodeClass (node, classes = []) {
-      let cssClass = (node._cssClass) ? node._cssClass : []
+    nodeClass(node, classes = []) {
+      let cssClass = node._cssClass ? node._cssClass : []
       if (!Array.isArray(cssClass)) cssClass = [cssClass]
       cssClass.push('node')
-      classes.forEach(c => cssClass.push(c))
+      classes.forEach((c) => cssClass.push(c))
       if (this.selected[node.id]) cssClass.push('selected')
       if (node.fx || node.fy) cssClass.push('pinned')
       return cssClass
     },
-    searchBackground () {
+    searchBackground() {
       let vm = this
       while (vm.$parent) {
         let style = window.getComputedStyle(vm.$el)
@@ -182,13 +197,13 @@ export default {
       }
       return 'white'
     },
-    spriteSymbol () {
+    spriteSymbol() {
       let svg = this.nodeSym
       if (svg) {
         return svgExport.toSymbol(svg)
       }
     },
-    linkAttrs (link) {
+    linkAttrs(link) {
       let attrs = link._svgAttrs || {}
       attrs['stroke-width'] = attrs['stroke-width'] || this.linkWidth
       return attrs

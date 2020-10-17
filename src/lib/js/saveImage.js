@@ -1,5 +1,5 @@
 export default {
-  save (img, name) {
+  save(img, name) {
     if (img) {
       img = this.dataURIToBlob(img, (blob) => {
         let url = URL.createObjectURL(blob)
@@ -7,7 +7,7 @@ export default {
       })
     }
   },
-  dataURIToBlob (dataURI, cb) {
+  dataURIToBlob(dataURI, cb) {
     let binStr = atob(dataURI.split(',')[1])
     let len = binStr.length
     let arr = new Uint8Array(len)
@@ -16,7 +16,7 @@ export default {
     }
     cb(new Blob([arr]))
   },
-  download (url, name) {
+  download(url, name) {
     name = name || ''
     let link = document.createElement('a')
     link.setAttribute('href', url)

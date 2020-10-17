@@ -1,10 +1,10 @@
 export default {
-  randomId () {
+  randomId() {
     return Math.random().toString(36).substring(7)
   },
 
   // gets canvas style from css properties
-  fillStyle (style, svg) {
+  fillStyle(style, svg) {
     let pseudo = null
     let id = 'picker-' + this.randomId()
     let el = this.canvasPicker(style, id)
@@ -20,7 +20,7 @@ export default {
     svg.removeChild(el)
     return style
   },
-  mapStyle (id, props, style, pseudo, numberValues) {
+  mapStyle(id, props, style, pseudo, numberValues) {
     let cStyle = window.getComputedStyle(document.getElementById(id), pseudo)
     numberValues = numberValues || ['lineWidth']
     for (let p in props) {
@@ -33,7 +33,7 @@ export default {
     return style
   },
   // creates svg elements to pick css properties
-  canvasPicker (style, id) {
+  canvasPicker(style, id) {
     let attrs = style._svgAttrs || {}
     let element = style._svgElement || 'circle'
     if (!style._svgAttrs) {
@@ -50,23 +50,25 @@ export default {
     attrs.id = id
     return this.svgCreate(element, attrs)
   },
-  compColor (color) {
+  compColor(color) {
     let el = document.createElement('div')
     el.style.backgroundColor = color
     document.body.appendChild(el)
-    let nColor = window.getComputedStyle(el, null).getPropertyValue('background-color')
+    let nColor = window
+      .getComputedStyle(el, null)
+      .getPropertyValue('background-color')
     document.body.removeChild(el)
     return nColor
   },
   // creates svg element
-  svgCreate (element, attrs) {
+  svgCreate(element, attrs) {
     let el = document.createElementNS('http://www.w3.org/2000/svg', element)
     for (let a in attrs) {
       el.setAttributeNS(null, a, attrs[a])
     }
     return el
   },
-  create (element, idPref, appendTo) {
+  create(element, idPref, appendTo) {
     appendTo = appendTo || 'body'
     let el = document.createElement(element)
     let id = idPref || ''

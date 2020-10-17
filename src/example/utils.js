@@ -4,7 +4,7 @@ export const findLinks = (nodeId, links) => {
   for (let link of links) {
     if (link.sid === nodeId || link.tid === nodeId) nodeLinks.push(link)
   }
-  return (nodeLinks.length) ? nodeLinks : null
+  return nodeLinks.length ? nodeLinks : null
 }
 export const findNode = (nodes, nodeId) => {
   let index = nodeExists(nodeId)
@@ -15,9 +15,9 @@ export const findNode = (nodes, nodeId) => {
 }
 // removes node by id => () => ( [newNodes] )
 export const removeNode = (nodeId, nodes, cb) => {
-  let index = nodes.findIndex(
-    (node) => { return node.id === nodeId }
-  )
+  let index = nodes.findIndex((node) => {
+    return node.id === nodeId
+  })
   if (index > -1) {
     nodes.splice(index, 1)
     cb(nodes)
@@ -53,18 +53,18 @@ export const rebuildNodes = (links, nodes) => {
 
 // finds node by id => boolean
 export const nodeExists = (nodeId, nodes) => {
-  let index = nodes.findIndex(
-    (node) => { return node.id === nodeId }
-  )
-  return (index > -1)
+  let index = nodes.findIndex((node) => {
+    return node.id === nodeId
+  })
+  return index > -1
 }
 
 // Checks if node is linked => boolean
 const isLinked = (nodeId, links) => {
-  let index = links.findIndex(
-    (link) => { return (link.tid === nodeId || link.sid === nodeId) }
-  )
-  return (index > -1)
+  let index = links.findIndex((link) => {
+    return link.tid === nodeId || link.sid === nodeId
+  })
+  return index > -1
 }
 
 // link formatter
@@ -100,8 +100,9 @@ export const newNode = (nodeId) => {
 
 // generates random nodes => [ nodes ]
 export const makeRandomNodes = (maxNodes) => {
-  let nodes = Array.apply(null, { length: maxNodes })
-    .map((value, index) => { return newNode(index) })
+  let nodes = Array.apply(null, { length: maxNodes }).map((value, index) => {
+    return newNode(index)
+  })
   return nodes
 }
 

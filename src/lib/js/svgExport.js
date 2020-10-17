@@ -2,7 +2,7 @@ export default {
   NS: 'http://www.w3.org/2000/svg',
   // svgOrg: svg element
   // allCss : true includes all svg css styles, false includes only matched styles
-  export (svgOrg, allCss) {
+  export(svgOrg, allCss) {
     let svg = null
     if (this.isSvgData(svgOrg)) {
       svg = svgOrg.cloneNode(true)
@@ -33,7 +33,7 @@ export default {
     return svg
   },
 
-  makeCanvas (width, height, background) {
+  makeCanvas(width, height, background) {
     let canvas = document.createElement('canvas')
     canvas.width = width
     canvas.height = height
@@ -43,11 +43,11 @@ export default {
     return canvas
   },
 
-  serialize (svg) {
-    return (new XMLSerializer()).serializeToString(svg)
+  serialize(svg) {
+    return new XMLSerializer().serializeToString(svg)
   },
 
-  svgToImg (svg, canvas, cb) {
+  svgToImg(svg, canvas, cb) {
     let xml = this.serialize(svg)
     let img = new Image()
     let ctx = canvas.getContext('2d')
@@ -59,14 +59,18 @@ export default {
     img.onerror = function (err) {
       cb(err)
     }
-    img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml)))
+    img.src =
+      'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(xml)))
   },
 
-  save (svg) {
-    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(this.serialize(svg))
+  save(svg) {
+    return (
+      'data:image/svg+xml;charset=utf-8,' +
+      encodeURIComponent(this.serialize(svg))
+    )
   },
 
-  getcssRules () {
+  getcssRules() {
     let rules = []
     for (let styles of document.styleSheets) {
       let styleRules = this.readRules(styles)
@@ -79,7 +83,7 @@ export default {
     return rules
   },
 
-  readRules (styles) {
+  readRules(styles) {
     try {
       if (!styles.cssRules) return styles.rules || []
     } catch (e) {
@@ -90,13 +94,13 @@ export default {
     return styles.cssRules
   },
 
-  toDom (svgData) {
+  toDom(svgData) {
     let div = document.createElement('div')
     div.innerHTML = svgData
     return div.firstChild || null
   },
 
-  toObject (svg) {
+  toObject(svg) {
     if (svg) {
       let attrs = {}
       if (svg.attributes) {
@@ -111,17 +115,17 @@ export default {
     return null
   },
 
-  svgElFromString (svgData) {
+  svgElFromString(svgData) {
     let svgEl = this.toDom(svgData)
     if (!this.isSvgData(svgEl)) return
     svgEl.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
     return svgEl
   },
 
-  svgDataToUrl (svgData, attrs) {
-    if (typeof (attrs) === 'object') {
+  svgDataToUrl(svgData, attrs) {
+    if (typeof attrs === 'object') {
       for (let a in attrs) {
-        let attribute = (attrs[a]) ? (attrs[a]) : ''
+        let attribute = attrs[a] ? attrs[a] : ''
         svgData.setAttribute(a, attribute)
       }
     }
@@ -130,12 +134,12 @@ export default {
     return null
   },
 
-  isSvgData (svgData) {
+  isSvgData(svgData) {
     if (!svgData.firstChild) return false
-    return (svgData.firstChild.parentNode.nodeName === 'svg')
+    return svgData.firstChild.parentNode.nodeName === 'svg'
   },
 
-  svgToUrl (svg) {
+  svgToUrl(svg) {
     let xml = new Blob([svg], { type: 'image/svg+xml' })
     let url = URL.createObjectURL(xml)
     return url

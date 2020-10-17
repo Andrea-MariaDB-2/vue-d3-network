@@ -1,21 +1,18 @@
-
 const pkg = require('./package.json')
 module.exports = {
   publicPath: '',
-  chainWebpack: config => {
-    config
-      .plugin('define')
-      .tap(args => {
-        args[0]['process.env'] = Object.assign(args[0]['process.env'], {
-          APP: {
-            name: JSON.stringify(pkg.name),
-            des: JSON.stringify(pkg.description),
-            version: JSON.stringify(pkg.version),
-            repo: JSON.stringify(pkg.repository.url)
-          }
-        })
-        return args
+  chainWebpack: (config) => {
+    config.plugin('define').tap((args) => {
+      args[0]['process.env'] = Object.assign(args[0]['process.env'], {
+        APP: {
+          name: JSON.stringify(pkg.name),
+          des: JSON.stringify(pkg.description),
+          version: JSON.stringify(pkg.version),
+          repo: JSON.stringify(pkg.repository.url)
+        }
       })
+      return args
+    })
     const svgRule = config.module.rule('svg')
 
     svgRule.uses.clear()

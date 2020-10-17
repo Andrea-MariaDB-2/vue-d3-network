@@ -24,7 +24,7 @@ export default {
   components: {
     d3NetExample
   },
-  data () {
+  data() {
     return {
       icons: {
         gitHub: ghIcon

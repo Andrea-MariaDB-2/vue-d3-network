@@ -1,8 +1,6 @@
-
+# vue-d3-network
 
 [![GitHub issues](https://img.shields.io/github/issues/emiliorizzo/vue-d3-network.svg)](https://github.com/emiliorizzo/vue-d3-network/issues) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/emiliorizzo/vue-d3-network/master/LICENSE) [![npm](https://img.shields.io/npm/v/vue-d3-network.svg)](https://www.npmjs.com/package/vue-d3-network)
-
-# vue-d3-network
 
 > Vue component to graph networks using d3-force
 
@@ -10,7 +8,7 @@
 
 ## Demo
 
-[Demo](https://emiliorizzo.github.io/vue-d3-network/)
+[Demo](https://svenc56.github.io/vue-d3-network/)
 
 ## Features
 
@@ -23,9 +21,10 @@
 
 ## Installation
 
-``` bash
+```bash
 npm install vue-d3-network --save
-
+# or
+yarn add vue-d3-network
 ```
 
 ## Usage
@@ -38,14 +37,14 @@ npm install vue-d3-network --save
 
 ```
 
-``` javascript  
+```javascript  
 import D3Network from 'vue-d3-network'
   components: {
     D3Network
   }
 ```
 
-``` html
+```html
 
 <style src="vue-d3-network/dist/vue-d3-network.css"></style>
 

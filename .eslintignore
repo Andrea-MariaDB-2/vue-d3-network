@@ -1,0 +1,5 @@
+.git/
+dist/
+example/
+node_modules/
+public/
