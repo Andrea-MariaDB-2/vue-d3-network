@@ -17,7 +17,7 @@
         input(type='radio' :value='true' v-model='opts.canvas' id='canvas-rad' @change="change")
         label(for='canvas-rad') canvas
       li
-        button.btn(@click="$emit('simulate')") Simulate
+        button.btn(style={cursor: "pointer"} @click="$emit('simulate')") Simulate
 
     ul.test-menu
       li
@@ -61,7 +61,7 @@
         label Straight Links
 
       li
-        button.btn(@click="reset" title="reset options")
+        button.btn(style={cursor: "pointer"} @click="reset" title="reset options")
           span(class="icon-reset")
           small &nbsp;Reset
 
@@ -84,6 +84,11 @@ export default {
     this.opts = this.options
     this.setts = this.settings
   },
+
+  mounted() {
+    this.reset()
+  },
+
   methods: {
     change() {
       this.$emit('options', this.opts)
