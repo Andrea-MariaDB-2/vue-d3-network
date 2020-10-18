@@ -188,11 +188,8 @@ export default {
       }
     },
     onResize() {
-      let size = this.options.size
-      if (!size || !size.w) this.size.w = this.$el.clientWidth
-      if (!size || !size.h) this.size.h = this.$el.clientHeight
-      this.padding.x = 0
-      this.padding.y = 0
+      this.size.w = this.$el.clientWidth
+      this.size.h = this.$el.clientHeight
       // serach offsets of parents
       let vm = this
       while (vm.$parent) {
