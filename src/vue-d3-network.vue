@@ -352,13 +352,14 @@ export default {
     },
     dragstarted() {
       const event = d3.getEvent()
+      if (!event.active) this.simulation.restart()
       const transform = this.transform
       event.subject.fx = transform.invertX(event.x)
       event.subject.fy = transform.invertY(event.y)
     },
     dragged() {
       const event = d3.getEvent()
-      this.simulation.alphaTarget(0.3).restart()
+      this.simulation.alphaTarget(0.5).restart()
       const transform = this.transform
       event.subject.fx = transform.invertX(event.x)
       event.subject.fy = transform.invertY(event.y)
